@@ -15,10 +15,24 @@ provider:
   stage: prod
   region: us-east-1
 
+environment:
+  tableName: notes
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+      - dynamodb:Query
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:DeleteItem
+      - dynamodb:DescribeTable
+    Resource: "arn:aws:dynamodb:ue-east-1:*:*"
+
 functions:
   hello:
-    handler: handler.hello
+    handler: create.main
     events:
       - http:
-          path: hello
-          method: get
+          path: notes
+          method: post
