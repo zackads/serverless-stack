@@ -27,7 +27,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
-      Resource: "arn:aws:dynamodb:ue-east-1:*:*"
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 functions:
   create:
@@ -54,3 +54,9 @@ functions:
       - http:
           path: notes/{id}
           method: put
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
